@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - Paper Restore King</title>
+    <meta
+      name="description"
+      content="Privacy Policy: how Paper Restore King collects, uses, and shares data when you use the app."
+    />
+    <link rel="canonical" href="./privacy-policy.html" />
+    <link rel="alternate" hreflang="en" href="./privacy-policy.html" />
+    <link rel="alternate" hreflang="zh-Hant-HK" href="../privacy-policy.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Privacy Policy - Paper Restore King" />
+    <meta
+      property="og:description"
+      content="Privacy Policy: how Paper Restore King collects, uses, and shares data when you use the app."
+    />
+    <meta property="og:image" content="../assets/hero-undo-handwriting.webp" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Privacy Policy - Paper Restore King",
+        "inLanguage": "en"
+      }
+    </script>
+
+    <style>
+      :root { --bg:#0b1220; --text:rgba(255,255,255,0.92); --muted:rgba(255,255,255,0.68); --border:rgba(255,255,255,0.12); }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "PingFang TC",
+          "Noto Sans HK", "Microsoft JhengHei", sans-serif;
+        color: var(--text);
+        background: radial-gradient(1200px 800px at 20% -10%, rgba(74, 163, 255, 0.35), transparent 60%), var(--bg);
+        line-height: 1.7;
+      }
+      a { color: inherit; text-decoration: none; }
+      .wrap { max-width: 900px; margin: 0 auto; padding: 28px 18px 60px; }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        background: rgba(11, 18, 32, 0.65);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .brand { font-weight: 900; letter-spacing: 0.2px; }
+      .links { display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
+      .pill {
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.03);
+        text-decoration:none;
+      }
+      .pill:hover { background: rgba(255,255,255,0.06); }
+      .card {
+        margin-top: 18px;
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.04);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      footer { margin-top: 26px; color: var(--muted); font-size: 14px; }
+      ul { padding-left: 20px; margin: 10px 0 0; color: var(--muted); }
+      li { margin: 8px 0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <div class="brand">Paper Restore King</div>
+        <div class="links">
+          <a class="pill" href="./index.html">Home</a>
+          <a class="pill" href="./contact.html">Contact Us</a>
+          <a class="pill" href="../privacy-policy.html">中文</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <h1 style="margin: 14px 0 6px; font-size: 34px; letter-spacing: -0.4px;">Privacy Policy - Paper Restore King</h1>
+      <p style="margin: 0 0 12px; color: var(--muted);">
+        Last updated: 2026-03-20
+      </p>
+
+      <div class="card">
+        <h2 style="margin: 0 0 8px; font-size: 18px;">1. Data We Collect</h2>
+        <ul>
+          <li>
+            Content you provide or create in the app: scanned document images (for handwriting removal), question/answer images (for wrong questions), and any answer text you enter (including AI-generated answers).
+          </li>
+          <li>
+            Device/App information needed to provide features: platform (iOS), selected output quality (1K / 2K), language setting (used to decide the AI reply language), and your app version (passed as metadata in the handwriting removal request).
+          </li>
+          <li>
+            Ads and credits: if you watch rewarded ads to earn credits, AdMob / Google Mobile Ads SDK may collect ad-related information according to Google’s policies. The app also stores today’s watched count locally to enforce a daily cap.
+          </li>
+          <li>
+            Purchases: in-app purchases are handled via StoreKit 2. Payment is processed by Apple; the app updates your local credit balance after successful verification.
+          </li>
+          <li>
+            Contact: if you email us, the content of your message (including your email address) is provided to us.
+          </li>
+        </ul>
+
+        <h2 style="margin: 18px 0 8px; font-size: 18px;">2. How We Use Data</h2>
+        <ul>
+          <li>
+            Handwriting removal: the app compresses images and sends them (base64) to our Cloudflare Worker endpoint (<code>/api/remove-handwriting</code>). The Worker calls OpenRouter and its model providers to process the images and returns the processed results. The app then displays and lets you export the output.
+          </li>
+          <li>
+            AI Q&A / wrong question answers: the app sends the selected question image (base64) to (<code>/api/ask-question</code>) together with the selected model, a max-words setting, and the language preference. The Worker calls OpenRouter and returns a structured text answer, which is saved to your wrong-question entry on your device.
+          </li>
+          <li>
+            Wrong question management and exports: your documents and wrong questions are stored locally. PDF/JPG/PNG exports are generated on-device and delivered through iOS sharing.
+          </li>
+          <li>
+            Credits and daily limits: we manage costs and credit balance locally, and use the stored daily watch count to limit rewarded ads per day.
+          </li>
+        </ul>
+
+        <h2 style="margin: 18px 0 8px; font-size: 18px;">3. Sharing and Third Parties</h2>
+        <ul>
+          <li>Cloudflare Workers: used to route and process requests.</li>
+          <li>OpenRouter and its model providers: used for image processing (handwriting removal) and text generation (AI Q&A).</li>
+          <li>Google AdMob / Google Mobile Ads: used to display rewarded ads and grant credits.</li>
+          <li>Apple / StoreKit 2: used for in-app purchase transactions.</li>
+          <li>Your selected sharing destination: exported files are shared using the iOS share flow.</li>
+        </ul>
+
+        <h2 style="margin: 18px 0 8px; font-size: 18px;">4. Local Storage and Retention</h2>
+        <ul>
+          <li>
+            Local storage: the app stores documents/wrong questions metadata and the images you provide or capture in the app’s local storage on your device.
+          </li>
+          <li>
+            Cloud processing: once a request is sent, Cloudflare Workers and third-party services process the data and may retain request-related logs or records according to their policies.
+          </li>
+          <li>
+            Deletion: you can delete documents or wrong questions inside the app to remove local content.
+          </li>
+        </ul>
+
+        <h2 style="margin: 18px 0 8px; font-size: 18px;">5. Your Choices</h2>
+        <ul>
+          <li>You can stop using handwriting removal and AI Q&A features.</li>
+          <li>You can choose whether to watch rewarded ads to earn credits.</li>
+          <li>You can manage (including deleting/exporting) your documents and wrong questions in the app.</li>
+          <li>If you have privacy questions, contact us by email.</li>
+        </ul>
+
+        <h2 style="margin: 18px 0 8px; font-size: 18px;">6. Contact Us</h2>
+        <p style="margin: 0; color: var(--muted);">
+          Email: <a href="mailto:info@chunwacreative.com">info@chunwacreative.com</a>
+        </p>
+      </div>
+
+      <footer>
+        Back to <a href="https://chunwacreative.com" target="_blank" rel="noopener">chunwacreative.com</a>.
+        <div style="margin-top: 10px;">
+          Contact:
+          <a href="mailto:info@chunwacreative.com">info@chunwacreative.com</a>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
+

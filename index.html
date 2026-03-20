@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>試卷還原王 - 移除手寫內容，還原乾淨試卷</title>
+    <meta
+      name="description"
+      content="試卷還原王：掃描文件、移除手寫、收錄錯題、拍照問答，並支援 PDF/JPG/PNG 匯出。"
+    />
+    <link rel="canonical" href="./index.html" />
+    <link rel="alternate" hreflang="en" href="./en/index.html" />
+    <link rel="alternate" hreflang="zh-Hant-HK" href="./index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="試卷還原王" />
+    <meta
+      property="og:description"
+      content="掃描文件、移除手寫、收錄錯題，讓復習更有效。"
+    />
+    <meta property="og:image" content="./assets/hero-undo-handwriting.webp" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "試卷還原王",
+        "applicationCategory": "EducationApplication",
+        "operatingSystem": "iOS",
+        "description": "掃描文件、移除手寫、收錄錯題，並支援 PDF/JPG/PNG 匯出。"
+      }
+    </script>
+
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: rgba(255, 255, 255, 0.06);
+        --card-2: rgba(255, 255, 255, 0.08);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.68);
+        --accent: #4aa3ff;
+        --accent-2: #6ee7b7;
+        --border: rgba(255, 255, 255, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "PingFang TC",
+          "Noto Sans HK", "Microsoft JhengHei", sans-serif;
+        color: var(--text);
+        background: radial-gradient(1200px 800px at 20% -10%, rgba(74, 163, 255, 0.35), transparent 60%),
+          radial-gradient(900px 600px at 90% 10%, rgba(110, 231, 183, 0.18), transparent 55%),
+          var(--bg);
+        line-height: 1.6;
+      }
+      a { color: inherit; text-decoration: none; }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        background: rgba(11, 18, 32, 0.55);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 24px;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+      }
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(74, 163, 255, 0.9), rgba(110, 231, 183, 0.6));
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 10px 30px rgba(74, 163, 255, 0.18);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .pill {
+        padding: 9px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .pill:hover { background: rgba(255, 255, 255, 0.06); }
+
+      .hero {
+        padding: 42px 0 18px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 22px;
+        align-items: stretch;
+      }
+      @media (max-width: 900px) {
+        .hero-grid { grid-template-columns: 1fr; }
+      }
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border: 1px solid rgba(74, 163, 255, 0.35);
+        background: rgba(74, 163, 255, 0.10);
+        border-radius: 999px;
+        color: rgba(255,255,255,0.92);
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .kicker-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 6px rgba(74, 163, 255, 0.12);
+      }
+      h1 {
+        font-size: clamp(30px, 3.6vw, 48px);
+        line-height: 1.15;
+        margin: 0 0 14px;
+        letter-spacing: -0.6px;
+      }
+      .lead {
+        font-size: 16px;
+        color: var(--muted);
+        margin: 0 0 22px;
+        max-width: 52ch;
+      }
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 26px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.04);
+        font-weight: 800;
+      }
+      .btn.primary {
+        border-color: rgba(74, 163, 255, 0.40);
+        background: rgba(74, 163, 255, 0.14);
+      }
+      .btn:hover { background: rgba(255, 255, 255, 0.07); }
+
+      .apple-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(0,0,0,0.18);
+        font-weight: 800;
+      }
+      .apple-badge svg { width: 18px; height: 18px; }
+      .shots {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+        aspect-ratio: 16 / 9;
+        padding: 12px;
+        min-height: 300px;
+      }
+      .shots-inner {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 12px;
+        width: 100%;
+        height: 100%;
+      }
+      .shots-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 16px;
+      }
+
+      .section-title {
+        margin: 32px 0 16px;
+        font-size: 22px;
+        letter-spacing: -0.2px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      @media (max-width: 900px) {
+        .grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+      }
+      .card {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: var(--card);
+        border-radius: 18px;
+        overflow: hidden;
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card img {
+        width: 100%;
+        aspect-ratio: 9 / 16;
+        height: auto;
+        object-fit: cover;
+        display: block;
+        background: rgba(0,0,0,0.18);
+      }
+      .card-body { padding: 14px 14px 16px; }
+      .card h3 {
+        font-size: 16px;
+        margin: 0 0 6px;
+        letter-spacing: -0.2px;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      footer {
+        margin-top: 36px;
+        padding: 18px 0 30px;
+        color: rgba(255,255,255,0.66);
+        font-size: 14px;
+      }
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        flex-wrap: wrap;
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+        padding-top: 18px;
+      }
+      .small-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .small-links a { opacity: 0.9; }
+      .small-links a:hover { opacity: 1; }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { scroll-behavior: auto !important; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div>試卷還原王</div>
+        </div>
+        <div class="nav-links">
+          <a class="pill" href="./contact.html">聯絡我們</a>
+          <a class="pill" href="./privacy-policy.html">私隱政策</a>
+          <a class="pill" href="./en/index.html" hreflang="en">English</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-label="Hero">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">
+              <span class="kicker-dot" aria-hidden="true"></span>
+              移除手寫、強化復習
+            </div>
+            <h1>把你的手寫變成乾淨的試卷。</h1>
+            <p class="lead">
+              掃描文件完成後，雲端移除手寫內容，並支援輸出 PDF / JPG / PNG。
+              你也可以收錄錯題，快速問答與高效複習。
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="https://apps.apple.com/" aria-label="Download on the App Store">
+                <span aria-hidden="true"></span>
+                下載 App Store
+              </a>
+              <a class="btn" href="./contact.html">想聯絡我們？</a>
+            </div>
+
+            <div class="apple-badge" role="note" aria-label="App Store badge">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M16.2 13.2c0 2.2 2 3 2 3s-1.2 3.5-3 3.5c-.9 0-1.6-.6-2.5-.6s-1.6.6-2.5.6c-1.8 0-3-3.2-3-3.2s-2.1-5.8.5-8.3c1-1 2.3-1.2 3.1-1.2.9 0 1.9.5 2.5.5.6 0 1.7-.5 2.9-.5.5 0 1.8.1 2.7 1.2-2.2 1.3-1.7 3.3-1.7 3.3Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M14.6 1.9c.2 1-.1 2.1-.7 2.8-.7.8-1.7 1.3-2.7 1.2-.2-1 .1-2 .8-2.8.6-.8 1.7-1.3 2.6-1.2Z"
+                  fill="currentColor"
+                  opacity="0.9"
+                />
+              </svg>
+              App Store / iOS
+            </div>
+          </div>
+
+          <div class="shots" aria-label="Screenshots">
+            <div class="shots-inner">
+              <img src="./assets/hero-undo-handwriting.webp" alt="移除手寫後的乾淨試卷示意" loading="lazy" />
+              <img src="./assets/feature-file-system.webp" alt="強大文件系統，多層資料夾管理示意" loading="lazy" />
+              <img src="./assets/feature-ai-teacher.webp" alt="AI 老師隨身解答示意" loading="lazy" />
+              <img src="./assets/hero-wrong-questions.webp" alt="錯題自動切割與高效複習示意" loading="lazy" />
+              <img src="./assets/feature-1k2k.webp" alt="1K / 2K 輸出品質示意" loading="lazy" />
+              <img src="./assets/feature-credits.webp" alt="拒絕訂閱制，按量付費示意" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Functions">
+        <h2 class="section-title">核心功能</h2>
+        <div class="grid">
+          <article class="card">
+            <img src="./assets/feature-ai-teacher.webp" alt="AI 老師隨身解答示意" loading="lazy" />
+            <div class="card-body">
+              <h3>拍照問答 / 快速圈選題目</h3>
+              <p>把題目框起來交給 AI：獲得結構化答案與思路，適合直接複習。</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="./assets/feature-practice-helper.webp" alt="隨時隨地刷題示意" loading="lazy" />
+            <div class="card-body">
+              <h3>隨時隨地複習</h3>
+              <p>從文件到錯題，流程順暢，讓你把時間花在理解與練習。</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="./assets/feature-1k2k.webp" alt="1K / 2K 輸出品質示意" loading="lazy" />
+            <div class="card-body">
+              <h3>輸出品質可選（1K / 2K）</h3>
+              <p>依你的需求調整品質：1K 更快；2K 更銳利，適合小字與細節。</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="./assets/feature-file-system.webp" alt="多層資料夾管理示意" loading="lazy" />
+            <div class="card-body">
+              <h3>強大的文件系統</h3>
+              <p>支援資料夾管理，把文件與錯題整理得更清楚。</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="./assets/feature-credits.webp" alt="拒絕訂閱制，按量付費示意" loading="lazy" />
+            <div class="card-body">
+              <h3>拒絕訂閱制</h3>
+              <p>按量使用點數：需要時再處理；更靈活的付費方式。</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="./assets/feature-ads-credits.webp" alt="看廣告換積分示意" loading="lazy" />
+            <div class="card-body">
+              <h3>看廣告換點數</h3>
+              <p>每日可透過觀看廣告獲得點數，幫助你持續完成作業與複習。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-label="Contact" style="margin-top: 34px;">
+        <h2 class="section-title">聯絡我們</h2>
+        <p style="margin: 0 0 16px; color: var(--muted); max-width: 70ch;">
+          如果你有功能建議、回饋或合作需求，歡迎透過 Email 聯絡：<a href="mailto:info@chunwacreative.com"><strong>info@chunwacreative.com</strong></a>
+        </p>
+        <p style="margin: 0; color: var(--muted);">也可查看我們的 <a href="./privacy-policy.html"><strong>私隱政策</strong></a>。</p>
+      </section>
+
+      <footer>
+        <div class="footer-row">
+          <div>
+            <div style="font-weight: 800; color: rgba(255,255,255,0.88);">試卷還原王</div>
+            <div>Back to <a href="https://chunwacreative.com" target="_blank" rel="noopener">chunwacreative.com</a></div>
+          </div>
+          <div class="small-links">
+            <a href="./contact.html">Contact Us</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="./en/index.html">English</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
+

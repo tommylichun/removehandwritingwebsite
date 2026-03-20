@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paper Restore King - Remove Handwriting & Revise Efficiently</title>
+    <meta
+      name="description"
+      content="Paper Restore King helps you remove handwriting from scanned papers, collect wrong questions, and export PDF/JPG/PNG."
+    />
+    <link rel="canonical" href="./index.html" />
+    <link rel="alternate" hreflang="en" href="./index.html" />
+    <link rel="alternate" hreflang="zh-Hant-HK" href="../index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Paper Restore King" />
+    <meta
+      property="og:description"
+      content="Remove handwriting from scanned papers. Collect wrong questions and revise faster."
+    />
+    <meta property="og:image" content="../assets/hero-undo-handwriting.webp" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Paper Restore King",
+        "applicationCategory": "EducationApplication",
+        "operatingSystem": "iOS",
+        "description": "Remove handwriting from scanned papers, collect wrong questions, and export PDF/JPG/PNG."
+      }
+    </script>
+
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: rgba(255, 255, 255, 0.06);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.68);
+        --accent: #4aa3ff;
+        --border: rgba(255, 255, 255, 0.12);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, "PingFang TC",
+          "Noto Sans HK", "Microsoft JhengHei", sans-serif;
+        color: var(--text);
+        background: radial-gradient(1200px 800px at 20% -10%, rgba(74, 163, 255, 0.35), transparent 60%), var(--bg);
+        line-height: 1.6;
+      }
+      a { color: inherit; text-decoration: none; }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        background: rgba(11, 18, 32, 0.55);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 24px;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      .brand { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:0.2px; }
+      .brand-mark {
+        width: 34px; height: 34px; border-radius: 12px;
+        background: linear-gradient(135deg, rgba(74, 163, 255, 0.9), rgba(110, 231, 183, 0.6));
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 10px 30px rgba(74, 163, 255, 0.18);
+      }
+      .nav-links { display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+      .pill {
+        padding: 9px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .pill:hover { background: rgba(255, 255, 255, 0.06); }
+
+      .hero { padding: 42px 0 18px; }
+      .hero-grid { display:grid; grid-template-columns: 1.15fr 0.85fr; gap:22px; align-items:stretch; }
+      @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+      .kicker {
+        display:inline-flex; align-items:center; gap:10px;
+        padding: 8px 12px;
+        border: 1px solid rgba(74, 163, 255, 0.35);
+        background: rgba(74, 163, 255, 0.10);
+        border-radius: 999px;
+        color: rgba(255,255,255,0.92);
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .kicker-dot { width:10px; height:10px; border-radius:999px; background: var(--accent); box-shadow: 0 0 0 6px rgba(74, 163, 255, 0.12); }
+      h1 { font-size: clamp(30px, 3.6vw, 48px); line-height:1.15; margin:0 0 14px; letter-spacing:-0.6px; }
+      .lead { font-size:16px; color: var(--muted); margin:0 0 22px; max-width: 52ch; }
+      .cta-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:26px; }
+      .btn {
+        display:inline-flex; align-items:center; gap:10px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.04);
+        font-weight: 800;
+      }
+      .btn.primary { border-color: rgba(74, 163, 255, 0.40); background: rgba(74, 163, 255, 0.14); }
+      .btn:hover { background: rgba(255, 255, 255, 0.07); }
+
+      .apple-badge {
+        display:inline-flex; align-items:center; gap:10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(0,0,0,0.18);
+        font-weight: 800;
+        margin-top: 6px;
+      }
+      .apple-badge svg { width: 18px; height: 18px; }
+
+      .shots {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 22px;
+        overflow:hidden;
+        box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+        aspect-ratio: 16 / 9;
+        padding: 12px;
+        min-height: 300px;
+      }
+      .shots-inner { display:grid; grid-template-columns:repeat(3, 1fr); grid-template-rows:repeat(2, 1fr); gap:12px; width:100%; height:100%; }
+      .shots-inner img {
+        width:100%; height:100%; object-fit:cover; display:block;
+        border-radius: 16px;
+      }
+
+      .section-title { margin: 32px 0 16px; font-size: 22px; letter-spacing: -0.2px; }
+      .grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:14px; }
+      @media (max-width: 900px) { .grid { grid-template-columns: repeat(1, minmax(0,1fr)); } }
+      .card {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: var(--card);
+        border-radius: 18px;
+        overflow:hidden;
+        min-height: 260px;
+        display:flex;
+        flex-direction:column;
+      }
+      .card img {
+        width: 100%;
+        aspect-ratio: 9 / 16;
+        height: auto;
+        object-fit: cover;
+        display: block;
+        background: rgba(0,0,0,0.18);
+      }
+      .card-body { padding: 14px 14px 16px; }
+      .card h3 { font-size: 16px; margin: 0 0 6px; letter-spacing: -0.2px; }
+      .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+      footer { margin-top: 36px; padding: 18px 0 30px; color: rgba(255,255,255,0.66); font-size: 14px; }
+      .footer-row { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; border-top: 1px solid rgba(255,255,255,0.10); padding-top: 18px; }
+      .small-links { display:flex; gap:12px; flex-wrap:wrap; }
+      .small-links a { opacity:0.9; }
+      .small-links a:hover { opacity:1; }
+      @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <div>Paper Restore King</div>
+        </div>
+        <div class="nav-links">
+          <a class="pill" href="./contact.html">Contact Us</a>
+          <a class="pill" href="./privacy-policy.html">Privacy Policy</a>
+          <a class="pill" href="../index.html" hreflang="zh-Hant-HK">中文</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-label="Hero">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">
+              <span class="kicker-dot" aria-hidden="true"></span>
+              Remove handwriting, revise smarter
+            </div>
+            <h1>Turn your handwriting into clean papers.</h1>
+            <p class="lead">
+              Scan your document, let the cloud remove handwriting, and export PDF / JPG / PNG.
+              You can also collect wrong questions for faster practice.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="https://apps.apple.com/" aria-label="Download on the App Store">
+                <span aria-hidden="true"></span>
+                Download on the App Store
+              </a>
+              <a class="btn" href="./contact.html">Get in touch</a>
+            </div>
+
+            <div class="apple-badge" role="note" aria-label="App Store badge">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M16.2 13.2c0 2.2 2 3 2 3s-1.2 3.5-3 3.5c-.9 0-1.6-.6-2.5-.6s-1.6.6-2.5.6c-1.8 0-3-3.2-3-3.2s-2.1-5.8.5-8.3c1-1 2.3-1.2 3.1-1.2.9 0 1.9.5 2.5.5.6 0 1.7-.5 2.9-.5.5 0 1.8.1 2.7 1.2-2.2 1.3-1.7 3.3-1.7 3.3Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M14.6 1.9c.2 1-.1 2.1-.7 2.8-.7.8-1.7 1.3-2.7 1.2-.2-1 .1-2 .8-2.8.6-.8 1.7-1.3 2.6-1.2Z"
+                  fill="currentColor"
+                  opacity="0.9"
+                />
+              </svg>
+              App Store / iOS
+            </div>
+          </div>
+
+          <div class="shots" aria-label="Screenshots">
+            <div class="shots-inner">
+              <img src="../assets/hero-undo-handwriting.webp" alt="Clean paper after handwriting removal" loading="lazy" />
+              <img src="../assets/feature-file-system.webp" alt="Powerful file system preview" loading="lazy" />
+              <img src="../assets/feature-ai-teacher.webp" alt="AI teacher Q&A preview" loading="lazy" />
+              <img src="../assets/hero-wrong-questions.webp" alt="Wrong question cropping and review flow" loading="lazy" />
+              <img src="../assets/feature-1k2k.webp" alt="1K/2K output quality preview" loading="lazy" />
+              <img src="../assets/feature-credits.webp" alt="No subscription—pay by use preview" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Functions">
+        <h2 class="section-title">Key Features</h2>
+        <div class="grid">
+          <article class="card">
+            <img src="../assets/feature-ai-teacher.webp" alt="AI teacher Q&A preview" loading="lazy" />
+            <div class="card-body">
+              <h3>Photo Q&A</h3>
+              <p>Frame the question and ask AI for a structured answer and revision tips.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="../assets/feature-practice-helper.webp" alt="Practice anywhere preview" loading="lazy" />
+            <div class="card-body">
+              <h3>Revise anytime</h3>
+              <p>From documents to wrong questions—keep your study flow smooth.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="../assets/feature-1k2k.webp" alt="1K/2K output quality preview" loading="lazy" />
+            <div class="card-body">
+              <h3>Output quality (1K / 2K)</h3>
+              <p>Choose the quality that matches your needs: fast (1K) or crisp details (2K).</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="../assets/feature-file-system.webp" alt="Folder management preview" loading="lazy" />
+            <div class="card-body">
+              <h3>Powerful file system</h3>
+              <p>Organize documents and wrong questions with folders and hierarchy.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="../assets/feature-credits.webp" alt="Credits and flexible billing preview" loading="lazy" />
+            <div class="card-body">
+              <h3>No subscription—pay by use</h3>
+              <p>Spend credits only when you need to process your pages.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="../assets/feature-ads-credits.webp" alt="Watch ads to earn credits preview" loading="lazy" />
+            <div class="card-body">
+              <h3>Earn credits by ads</h3>
+              <p>Watch short ads to earn daily credits and keep your revision going.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section aria-label="Contact" style="margin-top: 34px;">
+        <h2 class="section-title">Contact Us</h2>
+        <p style="margin: 0 0 16px; color: var(--muted); max-width: 70ch;">
+          Email us at
+          <a href="mailto:info@chunwacreative.com"><strong>info@chunwacreative.com</strong></a>.
+        </p>
+        <p style="margin: 0; color: var(--muted);">
+          Read our <a href="./privacy-policy.html"><strong>Privacy Policy</strong></a>.
+        </p>
+      </section>
+
+      <footer>
+        <div class="footer-row">
+          <div>
+            <div style="font-weight: 800; color: rgba(255,255,255,0.88);">Paper Restore King</div>
+            <div>Back to <a href="https://chunwacreative.com" target="_blank" rel="noopener">chunwacreative.com</a></div>
+          </div>
+          <div class="small-links">
+            <a href="./contact.html">Contact Us</a>
+            <a href="./privacy-policy.html">Privacy Policy</a>
+            <a href="../index.html" hreflang="zh-Hant-HK">中文</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
+
