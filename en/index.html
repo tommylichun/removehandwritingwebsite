@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Paper Restore King - Remove Handwriting & Revise Efficiently</title>
+    <link rel="icon" type="image/webp" href="../assets/logo.webp" />
+    <link rel="apple-touch-icon" href="../assets/logo.webp" />
+    <meta name="theme-color" content="#0b1220" />
     <meta
       name="description"
       content="Paper Restore King helps you remove handwriting from scanned papers, collect wrong questions, and export PDF/JPG/PNG."
@@ -70,9 +73,11 @@
       .brand { display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:0.2px; }
       .brand-mark {
         width: 34px; height: 34px; border-radius: 12px;
-        background: linear-gradient(135deg, rgba(74, 163, 255, 0.9), rgba(110, 231, 183, 0.6));
         border: 1px solid rgba(255, 255, 255, 0.18);
         box-shadow: 0 10px 30px rgba(74, 163, 255, 0.18);
+        overflow: hidden;
+        display: block;
+        object-fit: cover;
       }
       .nav-links { display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
       .pill {
@@ -175,7 +180,14 @@
     <header>
       <div class="nav">
         <div class="brand">
-          <div class="brand-mark" aria-hidden="true"></div>
+          <img
+            class="brand-mark"
+            src="../assets/logo.webp"
+            alt="Paper Restore King"
+            width="34"
+            height="34"
+            loading="eager"
+          />
           <div>Paper Restore King</div>
         </div>
         <div class="nav-links">
